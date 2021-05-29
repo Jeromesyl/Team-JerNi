@@ -1,22 +1,27 @@
 import React from "react";
 import { StyleSheet, View, Text, Button } from "react-native";
+import { CommonActions } from "@react-navigation/native";
+
+import * as Authentication from "../../api/auth";
 
 export default function ProfileScreen({ route, navigation }) {
-  const { id, stack } = route.params;
+  const handleLogout = () => {
+    Authentication.signOut(
+      () =>
+        navigation.dispatch(
+          CommonActions.reset({
+            index: 0,
+            routes: [{ name: "Login" }],
+          })
+        ),
+      console.error
+    );
+  };
   return (
     <View style={styles.background}>
       <View style={styles.profile}>
         <Text>Profile Screen</Text>
-        <Text>id: {JSON.stringify(id)}</Text>
-        <Text>stackId: {JSON.stringify(stack)}</Text>
-        <Button title="Home" onPress={() => navigation.navigate("Home")} />
-        <Button title="Go back" onPress={() => navigation.goBack()} />
-        <Button
-          title="Go to login"
-          onPress={() =>
-            navigation.push("Login", { id: id + 1, stack: stack + 1 })
-          }
-        />
+        <Button title="Sign out" onPress={handleLogout} />
       </View>
     </View>
   );
