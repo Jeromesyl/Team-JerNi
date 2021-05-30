@@ -1,12 +1,31 @@
 import React from "react";
 import { StyleSheet, View, Text, Button } from "react-native";
+import { CommonActions } from "@react-navigation/native";
 
-export default function HomeScreen({ navigation }) {
+import * as Authentication from "../../api/auth";
+
+export default function HomeScreen({ route, navigation }) {
+  const { name } = route.params;
+
+  const handleLogout = () => {
+    Authentication.signOut(
+      () =>
+        navigation.dispatch(
+          CommonActions.reset({
+            index: 0,
+            routes: [{ name: "Login" }],
+          })
+        ),
+      console.error
+    );
+  };
+
   return (
     <View style={styles.background}>
-      <View style={styles.homeButton}>
+      <View style={styles.profile}>
         <Text>Home Screen</Text>
-        <Button title="Login" onPress={() => navigation.navigate("Login")} />
+        <Text>Welcome {name}</Text>
+        <Button title="Sign out" onPress={handleLogout} />
       </View>
     </View>
   );
@@ -18,7 +37,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: "#FF5858",
   },
-  homeButton: {
+  profile: {
+    flex: 0.5,
     backgroundColor: "white",
     height: 50,
     width: "100%",

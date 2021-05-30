@@ -7,6 +7,7 @@ import {
   Image,
   TextInput,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 
 import * as Authentication from "../../api/auth";
@@ -31,14 +32,14 @@ const SignupPage = ({ navigation }) => {
             index: 0,
             routes: [
               {
-                name: "Profile",
+                name: "Home",
                 params: { name: user.displayName },
               },
             ],
           })
         ),
       (error) => {
-        return console.error(error);
+        return <Alert>{error}</Alert>;
       }
     );
   };
@@ -63,6 +64,7 @@ const SignupPage = ({ navigation }) => {
       <View style={styles.inputView}>
         <TextInput
           style={styles.TextInput}
+          ref={emailTextInput}
           keyboardType="email-address"
           value={email}
           placeholder="Enter Email Here"
