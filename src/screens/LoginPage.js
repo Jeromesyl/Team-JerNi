@@ -8,6 +8,7 @@ import {
   TextInput,
   Button,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 
 import * as Authentication from "../../api/auth";
@@ -27,14 +28,14 @@ const LoginPage = ({ navigation }) => {
             index: 0,
             routes: [
               {
-                name: "Profile",
+                name: "Home",
                 params: { name: user.displayName },
               },
             ],
           })
         ),
       (error) => {
-        return console.error(error);
+        return <Alert>{error}</Alert>;
       }
     );
   };

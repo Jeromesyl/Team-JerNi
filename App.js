@@ -3,21 +3,21 @@ import { StyleSheet, Text, View, SafeAreaView, Button } from "react-native";
 import { NavigationContainer, StackActions } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
-import HomeScreen from "./src/screens/HomeScreen";
+import StartScreen from "./src/screens/StartScreen";
 import LoginScreen from "./src/screens/LoginScreen";
-import ProfileScreen from "./src/screens/ProfileScreen";
+import HomeScreen from "./src/screens/HomeScreen";
 import SignupPage from "./src/screens/SignupPage";
 import LoginPage from "./src/screens/LoginPage";
 const Stack = createStackNavigator();
 
 export default function App() {
   return (
-    <NavigationContainer initialRouteName="Home">
+    <NavigationContainer initialRouteName="Start">
       <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Start" component={StartScreen} />
         <Stack.Screen name="Login" component={LoginPage} />
         <Stack.Screen name="Signup" component={SignupPage} />
-        <Stack.Screen name="Profile" component={ProfileScreen} />
+        <Stack.Screen name="Home" component={HomeScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
