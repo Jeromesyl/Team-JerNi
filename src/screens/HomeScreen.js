@@ -1,31 +1,35 @@
 import React from "react";
-import { StyleSheet, View, Text, Button } from "react-native";
-import { CommonActions } from "@react-navigation/native";
+import { StyleSheet, View, Text, TouchableOpacity, Button } from "react-native";
+import { data } from "../data/dummyData";
 
-import * as Authentication from "../../api/auth";
-
-export default function HomeScreen({ route, navigation }) {
-  const { name } = route.params;
-
-  const handleLogout = () => {
-    Authentication.signOut(
-      () =>
-        navigation.dispatch(
-          CommonActions.reset({
-            index: 0,
-            routes: [{ name: "Login" }],
-          })
-        ),
-      console.error
-    );
-  };
-
+export default function HomeScreen({ navigation }) {
   return (
     <View style={styles.background}>
-      <View style={styles.profile}>
-        <Text>Home Screen</Text>
-        <Text>Welcome {name}</Text>
-        <Button title="Sign out" onPress={handleLogout} />
+      <View style={styles.homeButton}>
+        <Button
+          title="Famous Chicken Rice"
+          onPress={() =>
+            navigation.navigate("Restaurant", {
+              name: data[0].name,
+              description: data[0].description,
+              rating: data[0].rating,
+              image: data[0].image,
+              menu: data[0].menu,
+            })
+          }
+        />
+        <Button
+          title="Famous Fried Carrot Cake"
+          onPress={() =>
+            navigation.navigate("Restaurant", {
+              name: data[1].name,
+              description: data[1].description,
+              rating: data[1].rating,
+              image: data[1].image,
+              menu: data[1].menu,
+            })
+          }
+        />
       </View>
     </View>
   );
@@ -37,8 +41,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: "#FF5858",
   },
-  profile: {
-    flex: 0.5,
+  homeButton: {
     backgroundColor: "white",
     height: 50,
     width: "100%",
