@@ -18,10 +18,10 @@ import { data } from "../data/dummyData";
 import Card from "../components/Card";
 
 export default function RestaurantDetails({ route, navigation }) {
-  const HEADER_HEIGHT = 350;
   const [headerDetails, setHeaderDetails] = useState([]);
   const [menu, setMenu] = useState([]);
   const offset = useRef(new Animated.Value(0)).current;
+  const HEADER_HEIGHT = 350;
 
   useEffect(() => {
     let { name, description, rating, image, menu } = route.params;
