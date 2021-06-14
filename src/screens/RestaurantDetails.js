@@ -24,12 +24,13 @@ export default function RestaurantDetails({ route, navigation }) {
   const offset = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
-    let { name, description, rating, image, menu } = route.params;
+    let { name, description, rating, image, location, menu } = route.params;
     let headerDetails = {
       name: name,
       description: description,
       rating: rating,
       image: image,
+      location: location,
     };
     setHeaderDetails(headerDetails);
     setMenu(menu);
@@ -112,15 +113,12 @@ export default function RestaurantDetails({ route, navigation }) {
             {renderInfo()}
             <View style={{ alignItems: "center" }}>
               <TouchableOpacity
-                style={{
-                  backgroundColor: "#FF5858",
-                  height: 35,
-                  width: "75%",
-                  borderRadius: 25,
-                  justifyContent: "center",
-                  alignItems: "center",
+                style={styles.mapButton}
+                onPress={() => {
+                  navigation.navigate("Maps", {
+                    location: headerDetails.location,
+                  });
                 }}
-                onPress={() => navigation.navigate("Maps")}
               >
                 <Text style={{ color: "white", fontWeight: "bold" }}>
                   Show on map
@@ -176,5 +174,13 @@ const styles = StyleSheet.create({
   description: {
     fontSize: 16,
     textAlign: "justify",
+  },
+  mapButton: {
+    backgroundColor: "#FF5858",
+    height: 35,
+    width: "75%",
+    borderRadius: 25,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });

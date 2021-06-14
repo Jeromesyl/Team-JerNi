@@ -5,32 +5,45 @@ import { data } from "../data/dummyData";
 export default function HomeScreen({ navigation }) {
   return (
     <View style={styles.background}>
-      <View style={styles.homeButton}>
-        <Button
-          title="Famous Chicken Rice"
-          onPress={() =>
-            navigation.navigate("Restaurant", {
-              name: data[0].name,
-              description: data[0].description,
-              rating: data[0].rating,
-              image: data[0].image,
-              menu: data[0].menu,
-            })
-          }
-        />
-        <Button
-          title="Famous Fried Carrot Cake"
-          onPress={() =>
-            navigation.navigate("Restaurant", {
-              name: data[1].name,
-              description: data[1].description,
-              rating: data[1].rating,
-              image: data[1].image,
-              menu: data[1].menu,
-            })
-          }
-        />
-      </View>
+      <Button
+        title="Famous Chicken Rice"
+        onPress={() =>
+          navigation.navigate("Restaurant", {
+            name: data[0].name,
+            description: data[0].description,
+            rating: data[0].rating,
+            image: data[0].image,
+            location: data[0].location,
+            menu: data[0].menu,
+          })
+        }
+      />
+      <Button
+        title="Famous Fried Carrot Cake"
+        onPress={() =>
+          navigation.navigate("Restaurant", {
+            name: data[1].name,
+            description: data[1].description,
+            rating: data[1].rating,
+            image: data[1].image,
+            location: data[1].location,
+            menu: data[1].menu,
+          })
+        }
+      />
+      <Button
+        title="Famous Western"
+        onPress={() =>
+          navigation.navigate("Restaurant", {
+            name: data[2].name,
+            description: data[2].description,
+            rating: data[2].rating,
+            image: data[2].image,
+            location: data[2].location,
+            menu: data[2].menu,
+          })
+        }
+      />
     </View>
   );
 }
