@@ -18,10 +18,10 @@ import { data } from "../data/dummyData";
 import Card from "../components/Card";
 
 export default function RestaurantDetails({ route, navigation }) {
+  const HEADER_HEIGHT = 350;
   const [headerDetails, setHeaderDetails] = useState([]);
   const [menu, setMenu] = useState([]);
   const offset = useRef(new Animated.Value(0)).current;
-  const HEADER_HEIGHT = 350;
 
   useEffect(() => {
     let { name, description, rating, image, menu } = route.params;
@@ -45,14 +45,7 @@ export default function RestaurantDetails({ route, navigation }) {
 
   function renderHeaderImg() {
     return (
-      <View
-        style={{
-          alignItems: "center",
-          overflow: "hidden",
-          marginTop: -1000,
-          paddingTop: 1000,
-        }}
-      >
+      <View style={styles.headerImg}>
         <Animated.Image
           source={headerDetails.image}
           resizeMode="contain"
@@ -83,29 +76,25 @@ export default function RestaurantDetails({ route, navigation }) {
     return (
       <View
         style={{
-          flexDirection: "row",
-          height: 130,
-          paddingHorizontal: 30,
-          paddingVertical: 20,
-          alignItems: "center",
-          overflow: "scroll",
+          padding: 20,
+          backgroundColor: "white",
         }}
       >
-        <View
-          style={{
-            flex: 1.5,
-            justifyContent: "center",
-          }}
-        >
+        <View style={styles.titleContainer}>
+          <Text style={styles.title}>{headerDetails.name}</Text>
+          <View style={{ flexDirection: "row", alignItems: "flex-end" }}>
+            <Text style={{ marginHorizontal: 2 }}>
+              Rating: {headerDetails.rating}
+            </Text>
+          </View>
+        </View>
+        <View>
           <Text
             style={{
-              fontSize: 20,
-              fontWeight: "bold",
+              padding: 20,
+              backgroundColor: "white",
             }}
           >
-            {headerDetails.name}
-          </Text>
-          <Text style={{ fontSize: 16, textAlign: "justify" }}>
             {headerDetails.description}
           </Text>
         </View>
@@ -121,6 +110,23 @@ export default function RestaurantDetails({ route, navigation }) {
           <View>
             {renderHeaderImg()}
             {renderInfo()}
+            <View style={{ alignItems: "center" }}>
+              <TouchableOpacity
+                style={{
+                  backgroundColor: "#FF5858",
+                  height: 35,
+                  width: "75%",
+                  borderRadius: 25,
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+                onPress={() => navigation.navigate("Maps")}
+              >
+                <Text style={{ color: "white", fontWeight: "bold" }}>
+                  Show on map
+                </Text>
+              </TouchableOpacity>
+            </View>
           </View>
         }
         scrollEventThrottle={16}
@@ -144,7 +150,31 @@ const styles = StyleSheet.create({
     width: "90%",
     alignSelf: "center",
   },
+  headerImg: {
+    alignItems: "center",
+    overflow: "hidden",
+    marginTop: -1000,
+    paddingTop: 1000,
+  },
+  headerInfo: {
+    height: 130,
+    paddingHorizontal: 30,
+    paddingVertical: 20,
+    alignItems: "center",
+    overflow: "scroll",
+  },
+  titleContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    flex: 1.5,
+    justifyContent: "center",
+  },
   title: {
     fontSize: 20,
+    fontWeight: "bold",
+  },
+  description: {
+    fontSize: 16,
+    textAlign: "justify",
   },
 });

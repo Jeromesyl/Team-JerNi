@@ -4,15 +4,15 @@ import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
 const Card = ({ itemData }) => {
   return (
     <View style={styles.card}>
+      <View style={styles.cardInfo}>
+        <Text style={styles.cardTitle}>{itemData.dish}</Text>
+      </View>
       <View style={styles.cardImgWrapper}>
         <Image
           source={itemData.image}
           resizeMode="cover"
           style={styles.cardImg}
         />
-      </View>
-      <View style={styles.cardInfo}>
-        <Text style={styles.cardTitle}>{itemData.dish}</Text>
       </View>
     </View>
   );
@@ -30,30 +30,32 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.8,
     shadowRadius: 2,
     elevation: 5,
+    borderRadius: 8,
+    backgroundColor: "#F3F3F3",
   },
   cardImgWrapper: {
-    flex: 1,
+    flex: 2,
   },
   cardImg: {
     height: "100%",
     width: "100%",
     alignSelf: "center",
     borderRadius: 8,
-    borderBottomRightRadius: 0,
-    borderTopRightRadius: 0,
+    // borderBottomLeftRadius: 0,
+    // borderTopLeftRadius: 0,
   },
   cardInfo: {
-    flex: 2,
+    flex: 3,
     padding: 10,
     borderColor: "#ccc",
-    borderWidth: 1,
-    borderLeftWidth: 0,
-    borderBottomRightRadius: 8,
-    borderTopRightRadius: 8,
-    backgroundColor: "#fff",
+    // borderWidth: 1,
+    // borderRightWidth: 0,
+    borderBottomLeftRadius: 8,
+    borderTopLeftRadius: 8,
   },
   cardTitle: {
     fontWeight: "bold",
+    fontSize: 16,
   },
   cardDetails: {
     fontSize: 12,

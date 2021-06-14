@@ -8,6 +8,7 @@ import Restaurant from "./src/screens/RestaurantDetails";
 import SignupPage from "./src/screens/SignupPage";
 import LoginPage from "./src/screens/LoginPage";
 import HomeScreen from "./src/screens/HomeScreen";
+import Maps from "./src/components/Maps";
 const Stack = createStackNavigator();
 
 export default function App() {
@@ -19,6 +20,7 @@ export default function App() {
          <Stack.Screen name="Signup" component={SignupPage} /> */}
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Restaurant" component={Restaurant} />
+        <Stack.Screen name="Maps" component={Maps} />
       </Stack.Navigator>
     </NavigationContainer>
   );
