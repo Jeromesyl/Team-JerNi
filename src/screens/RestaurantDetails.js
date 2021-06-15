@@ -13,28 +13,16 @@ import {
 
 import { CommonActions } from "@react-navigation/native";
 import { BlurView } from "@react-native-community/blur";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 
 import { data } from "../data/dummyData";
 import Card from "../components/Card";
 
-export default function RestaurantDetails({ route, navigation }) {
-  const HEADER_HEIGHT = 350;
-  const [headerDetails, setHeaderDetails] = useState([]);
-  const [menu, setMenu] = useState([]);
-  const offset = useRef(new Animated.Value(0)).current;
+const HEADER_HEIGHT = 350;
 
-  useEffect(() => {
-    let { name, description, rating, image, location, menu } = route.params;
-    let headerDetails = {
-      name: name,
-      description: description,
-      rating: rating,
-      image: image,
-      location: location,
-    };
-    setHeaderDetails(headerDetails);
-    setMenu(menu);
-  }, []);
+export default function RestaurantDetails({ route, navigation }) {
+  const offset = useRef(new Animated.Value(0)).current;
+  const itemData = route.params.itemData;
 
   function renderMenu({ item }) {
     return (
@@ -48,8 +36,8 @@ export default function RestaurantDetails({ route, navigation }) {
     return (
       <View style={styles.headerImg}>
         <Animated.Image
-          source={headerDetails.image}
-          resizeMode="contain"
+          source={itemData.image}
+          resizeMode="cover"
           style={{
             height: HEADER_HEIGHT,
             width: "200%",
@@ -82,49 +70,54 @@ export default function RestaurantDetails({ route, navigation }) {
         }}
       >
         <View style={styles.titleContainer}>
-          <Text style={styles.title}>{headerDetails.name}</Text>
-          <View style={{ flexDirection: "row", alignItems: "flex-end" }}>
-            <Text style={{ marginHorizontal: 2 }}>
-              Rating: {headerDetails.rating}
-            </Text>
-          </View>
+          <Text style={styles.title}>{itemData.name}</Text>
+        </View>
+        <View style={{ flexDirection: "row", alignItems: "flex-start" }}>
+          <Text style={{ marginHorizontal: 2 }}>Rating: {itemData.rating}</Text>
         </View>
         <View>
           <Text
             style={{
-              padding: 20,
+              padding: 10,
               backgroundColor: "white",
             }}
           >
-            {headerDetails.description}
+            {itemData.description}
           </Text>
         </View>
       </View>
     );
   }
 
+  function renderMap() {
+    return (
+      <View style={{ alignItems: "center" }}>
+        <TouchableOpacity
+          style={styles.mapButton}
+          onPress={() => {
+            navigation.navigate("Maps", {
+              itemData: itemData,
+            });
+          }}
+        >
+          <Text style={{ color: "white", fontSize: 18, fontWeight: "bold" }}>
+            Show on map
+          </Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
+
   return (
     <View style={styles.container}>
+      <StatusBar barStyle="light-content" />
       <Animated.FlatList
-        data={menu}
+        data={itemData.menu}
         ListHeaderComponent={
           <View>
             {renderHeaderImg()}
             {renderInfo()}
-            <View style={{ alignItems: "center" }}>
-              <TouchableOpacity
-                style={styles.mapButton}
-                onPress={() => {
-                  navigation.navigate("Maps", {
-                    location: headerDetails.location,
-                  });
-                }}
-              >
-                <Text style={{ color: "white", fontWeight: "bold" }}>
-                  Show on map
-                </Text>
-              </TouchableOpacity>
-            </View>
+            {renderMap()}
           </View>
         }
         scrollEventThrottle={16}
@@ -158,17 +151,14 @@ const styles = StyleSheet.create({
     height: 130,
     paddingHorizontal: 30,
     paddingVertical: 20,
-    alignItems: "center",
     overflow: "scroll",
   },
   titleContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "flex-start",
     flex: 1.5,
-    justifyContent: "center",
   },
   title: {
-    fontSize: 20,
+    fontSize: 25,
     fontWeight: "bold",
   },
   description: {

@@ -6,41 +6,42 @@ export default function HomeScreen({ navigation }) {
   return (
     <View style={styles.background}>
       <Button
-        title="Famous Chicken Rice"
+        title={data[0].name}
         onPress={() =>
           navigation.navigate("Restaurant", {
-            name: data[0].name,
-            description: data[0].description,
-            rating: data[0].rating,
-            image: data[0].image,
-            location: data[0].location,
-            menu: data[0].menu,
+            itemData: data[0],
           })
         }
       />
       <Button
-        title="Famous Fried Carrot Cake"
+        title={data[1].name}
         onPress={() =>
           navigation.navigate("Restaurant", {
-            name: data[1].name,
-            description: data[1].description,
-            rating: data[1].rating,
-            image: data[1].image,
-            location: data[1].location,
-            menu: data[1].menu,
+            itemData: data[1],
           })
         }
       />
       <Button
-        title="Famous Western"
+        title={data[2].name}
         onPress={() =>
           navigation.navigate("Restaurant", {
-            name: data[2].name,
-            description: data[2].description,
-            rating: data[2].rating,
-            image: data[2].image,
-            location: data[2].location,
-            menu: data[2].menu,
+            itemData: data[2],
+          })
+        }
+      />
+      <Button
+        title={data[3].name}
+        onPress={() =>
+          navigation.navigate("Restaurant", {
+            itemData: data[3],
+          })
+        }
+      />
+      <Button
+        title={data[4].name}
+        onPress={() =>
+          navigation.navigate("Restaurant", {
+            itemData: data[4],
           })
         }
       />
@@ -52,7 +53,7 @@ const styles = StyleSheet.create({
   background: {
     flex: 1,
     justifyContent: "center",
-    backgroundColor: "#FF5858",
+    backgroundColor: "white",
   },
   homeButton: {
     backgroundColor: "white",

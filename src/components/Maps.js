@@ -1,33 +1,34 @@
 import * as React from "react";
-import MapView, { PROVIDER_GOOGLE, Marker } from "react-native-maps";
-import { StyleSheet, Text, View, Dimensions } from "react-native";
+import MapView, { PROVIDER_GOOGLE, Marker, Callout } from "react-native-maps";
+import { StyleSheet, Text, View, Dimensions, Image } from "react-native";
 
 export default function Maps({ route, navigation }) {
-  const { location } = route.params;
+  const { itemData } = route.params;
   return (
     <View style={styles.container}>
       <MapView
         style={styles.map}
         provider={PROVIDER_GOOGLE}
         region={{
-          latitude: location.latitude,
-          longitude: location.longtitude,
+          latitude: itemData.location.latitude,
+          longitude: itemData.location.longtitude,
           latitudeDelta: 0.02,
           longitudeDelta: 0.0121,
         }}
       >
         <Marker
-          style={{
-            height: 50,
-            width: 50,
-          }}
           coordinate={{
-            latitude: location.latitude,
-            longitude: location.longtitude,
+            latitude: itemData.location.latitude,
+            longitude: itemData.location.longtitude,
           }}
-          image={require("../assets/map-marker.png")}
-          title="test"
-        />
+          title={itemData.name}
+        >
+          <Image
+            source={require("../assets/map-marker.png")}
+            style={{ width: 26, height: 28 }}
+            resizeMode="contain"
+          />
+        </Marker>
       </MapView>
     </View>
   );
@@ -42,6 +43,6 @@ const styles = StyleSheet.create({
   },
   map: {
     width: Dimensions.get("window").width,
-    height: "75%",
+    height: "100%",
   },
 });
