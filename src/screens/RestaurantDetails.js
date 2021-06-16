@@ -14,6 +14,7 @@ import {
 import { CommonActions } from "@react-navigation/native";
 import { BlurView } from "@react-native-community/blur";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
 
 import { data } from "../data/dummyData";
 import Card from "../components/Card";
@@ -73,7 +74,8 @@ export default function RestaurantDetails({ route, navigation }) {
           <Text style={styles.title}>{itemData.name}</Text>
         </View>
         <View style={{ flexDirection: "row", alignItems: "flex-start" }}>
-          <Text style={{ marginHorizontal: 2 }}>Rating: {itemData.rating}</Text>
+          <FontAwesomeIcon style={{ color: "#FF5858" }} icon={faStar} />
+          <Text style={{ marginHorizontal: 2 }}>{itemData.rating}</Text>
         </View>
         <View>
           <Text
