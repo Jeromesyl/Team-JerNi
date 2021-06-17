@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
   background: {
     flex: 1,
     justifyContent: "center",
-    backgroundColor: "white",
+    backgroundColor: "#FF5858",
   },
   homeButton: {
     backgroundColor: "white",

@@ -1,9 +1,14 @@
 import React from "react";
+import { View, Text } from "react-native";
 
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { faHome, faUserCircle } from "@fortawesome/free-solid-svg-icons";
+import MakanpeIcon from "../assets/makanpe-icon";
 
 import HomeScreen from "./HomeScreen";
 import Restaurant from "./RestaurantDetails";
@@ -59,10 +64,57 @@ function ProfileStackScreen() {
 
 export default function TabNav() {
   return (
-    <Tab.Navigator>
-      <Tab.Screen name="Home" component={HomeStackScreen} />
-      <Tab.Screen name="Decision" component={DecisionStackScreen} />
-      <Tab.Screen name="Profile" component={ProfileStackScreen} />
+    <Tab.Navigator
+      tabBarOptions={{
+        showLabel: false,
+        style: {
+          backgroundColor: "white",
+
+          height: 60,
+        },
+      }}
+    >
+      <Tab.Screen
+        name="Home"
+        component={HomeStackScreen}
+        options={{
+          tabBarIcon: ({ focused }) => (
+            <View>
+              <FontAwesomeIcon
+                icon={faHome}
+                size={35}
+                color={focused ? "#FF5858" : "#5B5B5B"}
+              />
+            </View>
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Decision"
+        component={DecisionStackScreen}
+        options={{
+          tabBarIcon: ({ focused }) => (
+            <View>
+              <MakanpeIcon color={focused ? "#FF5858" : "#5B5B5B"} />
+            </View>
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Profile"
+        component={ProfileStackScreen}
+        options={{
+          tabBarIcon: ({ focused }) => (
+            <View>
+              <FontAwesomeIcon
+                icon={faUserCircle}
+                size={35}
+                color={focused ? "#FF5858" : "#5B5B5B"}
+              />
+            </View>
+          ),
+        }}
+      />
     </Tab.Navigator>
   );
 }

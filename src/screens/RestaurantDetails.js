@@ -74,7 +74,7 @@ export default function RestaurantDetails({ route, navigation }) {
           <Text style={styles.title}>{itemData.name}</Text>
         </View>
         <View style={{ flexDirection: "row", alignItems: "flex-start" }}>
-          <FontAwesomeIcon style={{ color: "#FF5858" }} icon={faStar} />
+          <FontAwesomeIcon color="#FF5858" icon={faStar} />
           <Text style={{ marginHorizontal: 2 }}>{itemData.rating}</Text>
         </View>
         <View>
